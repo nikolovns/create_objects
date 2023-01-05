@@ -9,9 +9,7 @@ export interface ProductProps {
 
 export type ProductPropsTypes = {
     products: ProductProps[] | null,
-    saveProduct: (product: ProductProps) => void,
-    deleteProduct: (id: number) => void,
-    editProduct: (product: ProductProps) => void
+    fetchProducts: () => Promise<void>
 }
 
 export interface ChildrenProps {

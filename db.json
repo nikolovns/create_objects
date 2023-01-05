@@ -2,9 +2,17 @@
   "doors": [
     {
       "productType": "Door",
-      "model": "Model name",
-      "width": "90",
+      "model": "New Model",
+      "width": 90,
       "height": "190",
+      "shape": "rectangle",
+      "id": 1
+    },
+    {
+      "productType": "Door",
+      "model": "The best model",
+      "width": 100,
+      "height": "100",
       "shape": "circle",
       "id": 2
     }

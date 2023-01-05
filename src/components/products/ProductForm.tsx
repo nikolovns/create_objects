@@ -1,4 +1,4 @@
-import { ProductPropsTypes, ProductType } from "../../@types/ProductTypes";
+import { ProductProps, ProductPropsTypes, ProductType } from "../../@types/ProductTypes";
 import { useContext } from 'react';
 import ProductContext from "../../contexts/ProductContext";
 
@@ -7,7 +7,10 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import Button from '@mui/material/Button';
 import { Card, TextField, CardContent, Typography, CardActions } from "@mui/material";
 
-type FormFields = {
+import { useSaveProduct } from "../../hooks/save-product";
+import { useUpdateProduct } from "../../hooks/edit-product";
+
+interface FormFields {
     productType: string,
     model: string,
     width: number,
@@ -15,7 +18,7 @@ type FormFields = {
     shape: string
 }
 
-let initialState = {
+const initialState = {
     productType: '',
     model: '',
     width: 0,
@@ -26,27 +29,23 @@ let initialState = {
 export const ProductForm: React.FC<ProductType> = ({ product, handleEdit }) => {
 
     const { register, handleSubmit, reset, formState: { errors } } = useForm<FormFields>({
-        defaultValues: initialState
+        defaultValues: !product ? initialState : product
     });
 
     const onSubmit: SubmitHandler<FormFields> = data => handleFormSubmit(data);
 
-    if (product) {
-        initialState = product
-    }
+    const { handleCreateProduct } = useSaveProduct()
+    const { handleEditProduct } = useUpdateProduct()
 
-    const { saveProduct, editProduct } = useContext(ProductContext) as ProductPropsTypes;
-
-    const handleFormSubmit = async (data: FormFields) => {
-        console.log(product)
+    const handleFormSubmit = (data: FormFields) => {
         if (!product) {
-            saveProduct(data);
+            handleCreateProduct(data);
             reset()
             return;
         }
 
         //do this if the product exist - edit it.
-        editProduct(data)
+        handleEditProduct(data)
 
         //change the showEdit boolean to hide the edit form 
         handleEdit && handleEdit();

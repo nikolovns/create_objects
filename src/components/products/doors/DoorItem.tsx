@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { ProductProps, ProductType } from '../../../@types/ProductTypes';
+import { ProductProps } from '../../../@types/ProductTypes';
 import { ProductPropsTypes } from '../../../@types/ProductTypes';
 import ProductContext from '../../../contexts/ProductContext';
 import { EditProduct } from '../EditProduct';
@@ -7,19 +7,20 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import { Card, CardContent, Typography } from '@mui/material'
 import { Box } from '@mui/system';
+import { useDeleteProduct } from '../../../hooks/delete-product';
 
 export const DoorItem: React.FC<ProductProps> = (door) => {
 
     const [showEdit, setShowEdit] = useState(false)
 
-    const { deleteProduct } = useContext(ProductContext) as ProductPropsTypes;
+    const { handleDeleteProduct } = useDeleteProduct()
 
     const handleDelete = (id: number | undefined) => {
         if (!id) {
             return;
         }
 
-        deleteProduct(id);
+        handleDeleteProduct(id);
     }
 
     const handleEdit = () => {
