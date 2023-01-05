@@ -1,24 +1,32 @@
 import { DoorItem } from "./DoorItem";
 import { CreateProduct } from "../CreateProducts";
+import { ProductProps, ProductPropsTypes } from "../../../@types/ProductTypes";
 
-const doorsListItems = [
-    { productType: 'door', model: 'Model 1', width: 90, height: 190, shape: 'circle' },
-    { productType: 'door', model: 'Model 2', width: 95, height: 190, shape: 'rectangle' }
-]
+import ProductContext from "../../../contexts/ProductContext";
+import { useContext } from "react";
 
-export function DoorsList() {
+import Grid from '@mui/material/Grid'
 
-    const doorsList = doorsListItems.map((door, index) => {
-        return <DoorItem key={index} {...door} />
+export const DoorsList: React.FC = () => {
+
+    const { products } = useContext(ProductContext) as ProductPropsTypes
+
+    const doorsList = products?.map((door: ProductProps) => {
+        return <DoorItem key={door.id} {...door} />
     });
 
     return (
         <div>
-            <div>
-                <CreateProduct />
-            </div>
-            <div>{doorsList}</div>
-        </div>
+            <Grid container spacing={2}>
+                <Grid item xs={12} md={4}>
+                    <CreateProduct />
+                </Grid>
 
+                <Grid item xs={12} md={8}>
+                    <h2>Created Products</h2>
+                    <div>{doorsList}</div>
+                </Grid>
+            </Grid>
+        </div>
     )
 }

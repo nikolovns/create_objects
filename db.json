@@ -1,11 +1,12 @@
 {
   "doors": [
     {
-      "model": "Model 1",
-      "width": 90,
-      "height": 190,
-      "shape": "rectangle",
-      "id": 1
+      "productType": "Door",
+      "model": "Model name",
+      "width": "90",
+      "height": "190",
+      "shape": "circle",
+      "id": 2
     }
   ]
 }
