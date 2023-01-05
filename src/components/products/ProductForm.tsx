@@ -133,6 +133,7 @@ export const ProductForm: React.FC<ProductType> = ({ product, handleEdit }) => {
     )
 }
 
+
 const validation = {
     productType: {
         required: 'The field is reqired',

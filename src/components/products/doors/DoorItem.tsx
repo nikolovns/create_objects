@@ -1,7 +1,5 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { ProductProps } from '../../../@types/ProductTypes';
-import { ProductPropsTypes } from '../../../@types/ProductTypes';
-import ProductContext from '../../../contexts/ProductContext';
 import { EditProduct } from '../EditProduct';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';

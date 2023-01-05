@@ -9,15 +9,15 @@ export const Provider: React.FC<ChildrenProps> = ({ children }) => {
 
     const [createdObject, setCreatedObject] = useState<ProductProps[]>([]);
 
-    useEffect(() => {
-        fetchProducts()
-    }, []);
-
     const fetchProducts = useCallback(async () => {
         const response = await axios.get('http://localhost:3001/doors');
 
         setCreatedObject(response.data)
     }, [])
+
+    useEffect(() => {
+        fetchProducts()
+    }, [fetchProducts]);
 
     const productContext: ProductPropsTypes = {
         products: createdObject,
