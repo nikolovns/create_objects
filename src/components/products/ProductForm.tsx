@@ -1,22 +1,10 @@
-import { ProductProps, ProductPropsTypes, ProductType } from "../../@types/ProductTypes";
-import { useContext } from 'react';
-import ProductContext from "../../contexts/ProductContext";
-
+import { EditProductType } from "../../@types/ProductTypes";
 import { useForm, SubmitHandler } from "react-hook-form";
-
-import Button from '@mui/material/Button';
-import { Card, TextField, CardContent, Typography, CardActions } from "@mui/material";
+import { Button, Card, TextField, CardContent, Typography, CardActions } from "@mui/material";
 
 import { useSaveProduct } from "../../hooks/save-product";
 import { useUpdateProduct } from "../../hooks/edit-product";
-
-interface FormFields {
-    productType: string,
-    model: string,
-    width: number,
-    height: number,
-    shape: string
-}
+import { ProductProps } from "../../@types/ProductTypes";
 
 const initialState = {
     productType: '',
@@ -26,18 +14,18 @@ const initialState = {
     shape: ''
 }
 
-export const ProductForm: React.FC<ProductType> = ({ product, handleEdit }) => {
+export const ProductForm: React.FC<EditProductType> = ({ product, handleEdit }) => {
 
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<FormFields>({
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<ProductProps>({
         defaultValues: !product ? initialState : product
     });
 
-    const onSubmit: SubmitHandler<FormFields> = data => handleFormSubmit(data);
+    const onSubmit: SubmitHandler<ProductProps> = data => handleFormSubmit(data);
 
     const { handleCreateProduct } = useSaveProduct()
     const { handleEditProduct } = useUpdateProduct()
 
-    const handleFormSubmit = (data: FormFields) => {
+    const handleFormSubmit = (data: ProductProps) => {
         if (!product) {
             handleCreateProduct(data);
             reset()

@@ -16,7 +16,7 @@ export interface ChildrenProps {
     children: React.ReactNode;
 }
 
-export type ProductType = {
+export type EditProductType = {
     product?: ProductProps,
     handleEdit?: () => void
 }

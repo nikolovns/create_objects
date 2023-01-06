@@ -1,7 +1,7 @@
-import { ProductProps, ProductType } from "../../@types/ProductTypes"
+import { EditProductType } from "../../@types/ProductTypes"
 import { ProductForm } from "./ProductForm"
 
-export const EditProduct: React.FC<ProductType> = ({ product, handleEdit }) => {
+export const EditProduct: React.FC<EditProductType> = ({ product, handleEdit }) => {
 
     return (
         <ProductForm product={product} handleEdit={handleEdit} />
